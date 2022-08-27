@@ -1,32 +1,33 @@
 import React,{useEffect, useState} from 'react'
-import { Outlet, useParams } from 'react-router-dom'
+import {  useParams } from 'react-router-dom';
 import axios from 'axios';
 
 
-export default function CountryDetails({data}) {
+export default function CountryDetails() {
     const { countryId }  = useParams();
     const [country, setCountry] = useState(null)
 
     useEffect(()=>{
-        const getData = async(countryId) => {
+        const getData = async() => {
             try {
-                const response = await axios.get('http://ih-countries-api.herokuapp.com/countries') 
-                console.log(response)
-                setCountry(response)
-            } catch (error) {
-                console.log(error)
-            }
-            
+                const response = await axios.get(`https://ih-countries-api.herokuapp.com/countries`);
+                    console.log(response)
+                    setCountry(response)
+                } catch (error) {
+                    console.log(error)
+                }
         }
+        getData();
         
     },[countryId])
     
   return (
 
     <div>
-    <p>{country}</p>
-
-    <Outlet />
+    {!country && <p>loading..</p>}
+    <p>{country && country.map(country => (
+        <p>{country.name.common}</p>
+    ))}</p>
     </div>
   )
 }

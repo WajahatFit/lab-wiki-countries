@@ -21,9 +21,8 @@ function App() {
 
     <Route path='/' element={<CountriesList data={countryData} />} /> 
 
-    <Route path='/countrydetails' element={<CountryDetails  data={countryData}/>}> 
-    <Route path=':countryId' element={<CountryDetails  data={countryData}/>} /> 
-    </Route>
+    <Route path='/countrydetails' element={<CountryDetails  data={countryData}/>} /> 
+    <Route path='/:countryId' element={<CountryDetails  data={countryData}/>} />
     
     
 
